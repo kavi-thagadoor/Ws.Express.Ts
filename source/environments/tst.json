@@ -1,0 +1,13 @@
+{
+    "CurrentEnvConfig": {
+        "Port": 5000,
+        "EnvironmentName": "Testing"
+    },
+    "AllowedCrossDomains": [],
+    "DbConfig": {
+        "Server": "mongodb+srv://<username>:<password>@cluster0.qqbgvgo.mongodb.net/<db_name>?retryWrites=true&w=majority&appName=rezoe-tst",
+        "UserName": "kavi",
+        "Pwd": "vwreKKd9BDBFVFxT",
+        "Name": "test2"
+    }   
+}
