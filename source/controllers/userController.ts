@@ -1,4 +1,4 @@
-import * as userManagementService from "../managementService/userManagementService"; // Corrected import path
+import * as userManagementService from "../managementService/userManagementService"; 
 
 export const addMessage = async (request: Request,response: (response: Response) => void): Promise<void> => {
   try {   
@@ -7,3 +7,4 @@ export const addMessage = async (request: Request,response: (response: Response)
     console.error("Error handling message:", error);  
   }
 };
+

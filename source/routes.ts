@@ -1,4 +1,5 @@
 import * as userController from './controllers/userController';
+import { io } from './socket';
 
 
 // emit - post method from server
@@ -7,6 +8,6 @@ import * as userController from './controllers/userController';
 export const router = (socket: any) => {
 
   socket.on("message", (request: Request, response: (response: Response) => void) => {userController.addMessage(request, response);});
-
+ 
   
 };
