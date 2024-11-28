@@ -1,5 +1,6 @@
 import { io } from '../../socket'; 
 import * as coll from '../../model/coll';
+import * as typ from "../../utils/types";
 
 export const getMessage = async (request?: any): Promise<void> => {
   try {
@@ -7,6 +8,28 @@ export const getMessage = async (request?: any): Promise<void> => {
     const message = await coll._Chat().findById(request);
     // Emit the message to all connected clients
     io.emit("message", message?.msg);
+
+    // console.log("Message broadcasted:", message?.msg);
+  } catch (error) {
+    console.error("Error broadcasting message:", error);
+  }
+};
+
+export const getAllMessage = async (request?: any): Promise<void> => {
+  try {
+    
+    const allMessage = await coll._Chat().find();
+
+    const response = allMessage.map(x => ({
+      id:x.id,
+      message: x.msg 
+    })) as typ.GeneralResponse[];
+
+    // Emit the message to all connected clients
+    io.emit("messages", response, (ack: any) => {
+      console.log("Acknowledgment received");
+    });
+    
 
     // console.log("Message broadcasted:", message?.msg);
   } catch (error) {
