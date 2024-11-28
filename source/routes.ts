@@ -1,9 +1,12 @@
-import { io } from "./socket";
 import * as userController from './controllers/userController';
 
-io.on("connection", (socket) => {  
 
-  socket.on("message", (request, callback) => userController.addMessage(request, callback));
+// emit - post method from server
+// on - get method from client
 
-  socket.on("disconnect", () => {});
-});
+export const router = (socket: any) => {
+
+  socket.on("message", (request: Request, response: (response: Response) => void) => {userController.addMessage(request, response);});
+
+  
+};

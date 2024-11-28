@@ -1,8 +1,8 @@
 import * as userManagement from "../management/userManagement";
 
-export const addMessage = async (request: any,callback?: (response: any) => void): Promise<void> => {
+export const addMessage = async (request: any,response: (response: any) => void): Promise<void> => {
   try {
-    await userManagement.addMessage(request,callback);
+    await userManagement.addMessage(request,response);
   } catch (error) {
     console.error("Error processing message:", error);
   }
