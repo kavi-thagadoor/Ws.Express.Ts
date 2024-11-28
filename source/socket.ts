@@ -2,7 +2,8 @@ import { Server } from "socket.io";
 import { createServer } from "http";
 import express from "express";
 import * as cons from "./Constant";
-import { router } from '../source/routes';  
+import { router } from '../source/routes';
+import * as versionController from './controllers/versionController';
 
 const app = express();
 const server = createServer(app);
@@ -13,16 +14,18 @@ const io = new Server(server, {
   },
 });
 
+app.get('/version', (req, res) => {versionController.version(req, res);});
+
 io.on("connection", (socket) => {
   console.log(`Socket with id ${socket.id} connection`);
   // Use the router to handle socket events
   router(socket); // Call the router, passing the socket instance
 
   // Listen for the disconnect event
-  // socket.on("disconnect", () => {
-  //   console.log(`Socket with id ${socket.id} disconnected`);
-  //   // Optionally, perform cleanup or logging here when a client disconnects
-  // });
+  socket.on("disconnect", () => {
+    console.log(`Socket with id ${socket.id} disconnected`);
+    // Optionally, perform cleanup or logging here when a client disconnects
+  });
 });
 
 export { app, server, io };
