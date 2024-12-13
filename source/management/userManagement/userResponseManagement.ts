@@ -1,6 +1,7 @@
 import { io } from '../../socket'; 
 import * as coll from '../../model/coll';
 import * as typ from "../../utils/types";
+import { FieldName } from '../../model/collectionName';
 
 export const getMessage = async (request?: any): Promise<void> => {
   try {
@@ -19,7 +20,6 @@ export const getAllMessage = async (request?: any): Promise<void> => {
   try {
     
     const allMessage = await coll._Chat().find();
-
     const response = allMessage.map(x => ({
       id:x.id,
       message: x.msg 
